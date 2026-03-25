@@ -1,54 +1,53 @@
 [
   {
     "id": 11,
-    "text": "Да",
-    "QuestionId": 2
+    "answerBody": "Да",
+    "nextQuestionId": 2
   },
   {
     "id": 12,
-    "text": "Нет",
-    "QuestionId": 2,
+    "answerBody": "Нет",
+    "nextQuestionId": 2,
     "isYourSmellGood": false
   },
   {
     "id": 21,
-    "text": "Да",
-    "QuestionId": 3
+    "answerBody": "Да",
+    "nextQuestionId": 3
   },
   {
     "id": 22,
-    "text": "Нет",
-    "QuestionId": 3,
-    "funnyDressed": true
+    "answerBody": "Нет",
+    "nextQuestionId": 3
   },
   {
     "id": 31,
-    "text": "Купить цветы рядом с домом",
-    "QuestionId": 4
+    "answerBody": "Купить цветы рядом с домом",
+    "nextQuestionId": 4
   },
   {
     "id": 32,
-    "text": "Купить цветы на месте",
-    "endPointId": 3
+    "answerBody": "Купить цветы на месте",
+    "nextEndPointId": 3
   },
   {
     "id": 41,
-    "text": "Метро",
-    "QuestionId": 5
+    "answerBody": "Метро",
+    "nextQuestionId": 5
   },
   {
     "id" : 42,
-    "text" : "Такси",
-    "endPointId" : 4
+    "answerBody" : "Такси",
+    "nextEndPointId" : 4
   },
   {
     "id": 51,
-    "text": "Подождать",
-    "endPointId" : 5
+    "answerBody": "Подождать",
+    "nextEndPointId" : 5
   },
   {
     "id": 52,
-    "text": "Отойти в ближайшую кофейню и подождать там",
-    "endPointId" : 52
+    "answerBody": "Отойти в ближайшую кофейню и подождать там",
+    "nextEndPointId" : 52
   }
 ]
