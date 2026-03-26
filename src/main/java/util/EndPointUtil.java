@@ -1,8 +1,7 @@
-package service;
+package util;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import entity.Answer;
 import entity.EndPoint;
 
 import java.io.InputStreamReader;
@@ -10,12 +9,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
-public class EndPointService {
+public class EndPointUtil {
     public static List<EndPoint> getEndPoints() {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<EndPoint>>() {
         }.getType();
-        InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(AnswerService.class.getResourceAsStream("/endPointData.json")));
+        InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(AnswerUtil.class.getResourceAsStream("/endPointData.json")));
         return gson.fromJson(reader, listType);
     }
 

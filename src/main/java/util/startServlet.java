@@ -1,10 +1,11 @@
+package util;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.QuestionService;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class startServlet extends HttpServlet {
         HttpSession currentSession = req.getSession();
         currentSession.setAttribute("playerName", playerName);
         currentSession.setAttribute("questionId", startQuestionId);
-        currentSession.setAttribute("question", QuestionService.getQuestionById(1));
+        currentSession.setAttribute("question", QuestionUtil.getQuestionById(1));
         resp.sendRedirect(req.getContextPath()+"/main-quest");
     }
 }

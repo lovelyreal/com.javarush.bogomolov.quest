@@ -9,13 +9,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.AnswerService;
-import service.EndPointService;
-import service.QuestionService;
+import util.AnswerUtil;
+import util.EndPointUtil;
+import util.QuestionUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
 @WebServlet("/main-quest")
 public class mainController extends HttpServlet {
@@ -44,7 +43,7 @@ public class mainController extends HttpServlet {
             long[] answerIds = question.getNextAnswerId();
             if (answerIds != null && answerIds.length > 0) {
                 out.println("<form action='" + req.getContextPath() + "/main-quest' method='post'>");
-                Answer firstAnswer = AnswerService.getAnswerById((int) answerIds[0]);
+                Answer firstAnswer = AnswerUtil.getAnswerById((int) answerIds[0]);
                 if (firstAnswer != null) {
                     out.println("<button type='submit' name='answerId' value='" + answerIds[0] + "'>");
                     out.println(firstAnswer.getAnswerBody());
@@ -52,7 +51,7 @@ public class mainController extends HttpServlet {
                 }
 
                 if (answerIds.length > 1) {
-                    Answer secondAnswer = AnswerService.getAnswerById((int) answerIds[1]);
+                    Answer secondAnswer = AnswerUtil.getAnswerById((int) answerIds[1]);
                     if (secondAnswer != null) {
                         out.println("<button type='submit' name='answerId' value='" + answerIds[1] + "'>");
                         out.println(secondAnswer.getAnswerBody());
@@ -84,8 +83,8 @@ public class mainController extends HttpServlet {
         HttpSession session = req.getSession();
 
         System.out.println("Chosen ID: " + answerId);
-        session.setAttribute("question", QuestionService.getQuestionById((int) AnswerService.getAnswerById((int) answerId).getNextQuestionId()));
-        session.setAttribute("endPoint", EndPointService.getEndPointById((int) AnswerService.getAnswerById((int) answerId).getNextEndPointId()));
+        session.setAttribute("question", QuestionUtil.getQuestionById((int) AnswerUtil.getAnswerById((int) answerId).getNextQuestionId()));
+        session.setAttribute("endPoint", EndPointUtil.getEndPointById((int) AnswerUtil.getAnswerById((int) answerId).getNextEndPointId()));
         resp.sendRedirect(req.getContextPath() + "/main-quest");
     }
 }
