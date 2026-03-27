@@ -1,40 +1,16 @@
 package entity;
 
 public class Answer{
-    private long id;
+    private int id;
     private String answerBody;
     private long nextQuestionId;
     private long nextEndPointId;
     private boolean isYourSmellGood = true;
 
 
-    public Answer(long id, String answerBody, long nextQuestionId) {
+    public Answer(int id, String answerBody, long nextQuestionId) {
         this.id = id;
         this.answerBody = answerBody;
-        this.nextQuestionId = nextQuestionId;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getAnswerBody() {
-        return answerBody;
-    }
-
-    public void setAnswerBody(String answerBody) {
-        this.answerBody = answerBody;
-    }
-
-    public long getNextQuestionId() {
-        return nextQuestionId;
-    }
-
-    public void setNextQuestionId(long nextQuestionId) {
         this.nextQuestionId = nextQuestionId;
     }
 
@@ -42,15 +18,21 @@ public class Answer{
         return nextEndPointId;
     }
 
-    public void setNextEndPointId(long nextEndPointId) {
-        this.nextEndPointId = nextEndPointId;
+    public long getNextQuestionId() {
+        return nextQuestionId;
     }
 
-    public boolean isYourSmellGood() {
-        return isYourSmellGood;
+    public int getId() {
+        return id;
     }
 
-    public void setYourSmellGood(boolean yourSmellGood) {
-        isYourSmellGood = yourSmellGood;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public String getAnswerBody() {
+        return answerBody;
+    }
+
+
 }

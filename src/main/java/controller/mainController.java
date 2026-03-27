@@ -9,13 +9,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.AnswerUtil;
-import util.EndPointUtil;
-import util.QuestionUtil;
+import util.Data;
+import util.StepUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+/* TO:DO
+1. Greetengs servlet перенести в jsp
+2. оформить jsp
+3. добавить тест
+4. попереносить файлики(структура проекта)
+*/
 @WebServlet("/main-quest")
 public class mainController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,13 +41,12 @@ public class mainController extends HttpServlet {
         out.println("<h3>Игрок: " + playerName + "</h3>");
         Question question = (Question) session.getAttribute("question");
         EndPoint endpoint = (EndPoint) session.getAttribute("endPoint");
-
         if (question != null) {
             out.println("<h2>" + question.getQuestionBody() + "</h2>");
             long[] answerIds = question.getNextAnswerId();
             if (answerIds != null && answerIds.length > 0) {
                 out.println("<form action='" + req.getContextPath() + "/main-quest' method='post'>");
-                Answer firstAnswer = AnswerUtil.getAnswerById((int) answerIds[0]);
+                Answer firstAnswer = (Answer) StepUtil.getStepById((int) answerIds[0], Data.answers);
                 if (firstAnswer != null) {
                     out.println("<button type='submit' name='answerId' value='" + answerIds[0] + "'>");
                     out.println(firstAnswer.getAnswerBody());
@@ -51,7 +54,7 @@ public class mainController extends HttpServlet {
                 }
 
                 if (answerIds.length > 1) {
-                    Answer secondAnswer = AnswerUtil.getAnswerById((int) answerIds[1]);
+                    Answer secondAnswer = (Answer) StepUtil.getStepById((int) answerIds[1], Data.answers);
                     if (secondAnswer != null) {
                         out.println("<button type='submit' name='answerId' value='" + answerIds[1] + "'>");
                         out.println(secondAnswer.getAnswerBody());
@@ -79,12 +82,20 @@ public class mainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        long answerId = Integer.parseInt(req.getParameter("answerId"));
+        int answerId = Integer.parseInt(req.getParameter("answerId"));
         HttpSession session = req.getSession();
-
         System.out.println("Chosen ID: " + answerId);
-        session.setAttribute("question", QuestionUtil.getQuestionById((int) AnswerUtil.getAnswerById((int) answerId).getNextQuestionId()));
-        session.setAttribute("endPoint", EndPointUtil.getEndPointById((int) AnswerUtil.getAnswerById((int) answerId).getNextEndPointId()));
+        Answer chosenAnswer = (Answer) StepUtil.getStepById(answerId, Data.answers);
+        if (chosenAnswer == null) {
+            System.out.println("Answer not found for ID: " + answerId);
+            resp.sendRedirect(req.getContextPath() + "/main-quest");
+            return;
+        }
+        Question nextQuestion = (Question) StepUtil.getStepById((int)chosenAnswer.getNextQuestionId(), Data.questions);
+        EndPoint nextEndpoint = (EndPoint) StepUtil.getStepById((int)chosenAnswer.getNextEndPointId(), Data.endPoints);
+        session.setAttribute("question", nextQuestion);
+        session.setAttribute("endPoint", nextEndpoint);
+
         resp.sendRedirect(req.getContextPath() + "/main-quest");
     }
 }
