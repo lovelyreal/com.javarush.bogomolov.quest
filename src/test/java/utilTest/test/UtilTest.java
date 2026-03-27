@@ -26,7 +26,7 @@ public class UtilTest {
         String testEndPointBody = EndPointBody.endPointBody.get(EndPointId.endPointId[testId]);
             assertEquals(utilAnswerBody, testAnswerBody);
             assertEquals(utilQuestionBody, testQuestionBody);
-            assertEquals(utilEndPointBody, utilEndPointBody);
+            assertEquals(utilEndPointBody, testEndPointBody);
 
     }
 }
