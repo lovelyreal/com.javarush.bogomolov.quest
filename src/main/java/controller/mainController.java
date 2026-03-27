@@ -41,7 +41,14 @@ public class mainController extends HttpServlet {
         out.println("<h3>Игрок: " + playerName + "</h3>");
         Question question = (Question) session.getAttribute("question");
         EndPoint endpoint = (EndPoint) session.getAttribute("endPoint");
-        if (question != null) {
+        if (endpoint != null) {
+            out.println("<h1>" + endpoint.getText() + "</h1>");
+            out.println("<form action='" + req.getContextPath() + "/greetings' method='get'>");
+            out.println("<button type='submit'>");
+            out.println("Попробуй снова :)");
+            out.println("</button>");
+        }
+        else if (question != null) {
             out.println("<h2>" + question.getQuestionBody() + "</h2>");
             long[] answerIds = question.getNextAnswerId();
             if (answerIds != null && answerIds.length > 0) {
@@ -67,13 +74,7 @@ public class mainController extends HttpServlet {
                 out.println("<p>Нет доступных вариантов ответа</p>");
             }
         }
-        if (question == null && endpoint != null) {
-            out.println("<h1>" + endpoint.getText() + "</h1>");
-            out.println("<form action='" + req.getContextPath() + "/greetings' method='get'>");
-            out.println("<button type='submit'>");
-            out.println("Попробуй снова :)");
-            out.println("</button>");
-        }
+
 
         out.println("</body>");
         out.println("</html>");

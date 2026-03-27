@@ -1,4 +1,4 @@
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
@@ -19,7 +19,8 @@
         <div class="card-body">
             <h1 class="card-title">Доброго времени суток!</h1>
             <p class="card-text">Я создал маленькую историю, в которой именно ты - главный герой.</p>
-            <a href="greetings" class="btn btn-primary btn-start">
+            <a href="<c:url value='/greetings'/>"
+               class="btn btn-primary btn-start">
                 Начать
             </a>
         </div>

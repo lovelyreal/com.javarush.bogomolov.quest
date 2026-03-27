@@ -8,7 +8,7 @@
     "id": 12,
     "answerBody": "Нет",
     "nextQuestionId": 2,
-    "isYourSmellGood": false
+    "nextEndPointId" : 6
   },
   {
     "id": 21,
